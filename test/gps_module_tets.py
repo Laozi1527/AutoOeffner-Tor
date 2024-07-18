@@ -24,7 +24,9 @@ def get_GPS():
             if new_data1[1] == "A":
                 lat = new_data1[4],new_data1[5]
                 lon = new_data1[6],new_data1[7]
-            return lat, lon
+                return lat, lon
+            else:
+                return None
 
 print("Test different applications!\nGPS receiving and decoding:  1\nTransmitting opening signal:  2")
 if input() == 1:
