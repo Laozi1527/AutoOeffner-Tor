@@ -36,10 +36,13 @@ def get_GPS_cords(Data):
 GPS_sensor = serial.Serial('/dev/ttyS0', baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS) # Serial Addresse anpassen!
 sleep(1)
 logs = open("logs.txt", mode="w")
+logs_complete = open("logs_complete-txr", mode="w")
 
 while True:
     if GPS_sensor.in_waiting > 0:
-        lattitude, longitude = get_GPS_cords(GPS_sensor.readline())
+        data = GPS_sensor.readline()
+        lattitude, longitude = get_GPS_cords(data)
+        logs_complete.write(data)
         if lattitude != None and longitude != None:
             logs.write("Lattitude:",lattitude,"\nLongitude:",longitude + "\n")
     sleep(0.1)
